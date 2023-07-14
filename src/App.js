@@ -32,9 +32,7 @@ function App() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    client.get("/api/user", {
-        headers: corsHeaders
-        })
+    client.get("/api/user")
     .then(function(res) {
       setCurrentUser(true);
     })
@@ -61,11 +59,7 @@ function App() {
         email: email,
         username: username,
         password: password
-      },
-      {
-        headers: corsHeaders
       }
-      
     ).then(function(res) {
       client.post(
         "/api/login",
@@ -89,9 +83,6 @@ function App() {
       {
         email: email,
         password: password
-      },
-      {
-        headers: corsHeaders
       }
     ).then(function(res) {
       setCurrentUser(true);
