@@ -19,7 +19,8 @@ const client = axios.create({
 
 const headers = {
   'Content-Type': 'application/json',
-  "Access-Control-Allow-Origin": "*"
+  "Access-Control-Allow-Origin": "*",
+  'Access-Control-Allow-Credentials': true
 }
 
 function App() {
