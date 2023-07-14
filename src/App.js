@@ -17,6 +17,10 @@ const client = axios.create({
   baseURL: "https://myfinancejb-2225ee8966e8.herokuapp.com"
 });
 
+const headers = {
+  'Content-Type': 'application/json'
+}
+
 function App() {
 
   const [currentUser, setCurrentUser] = useState();
@@ -26,7 +30,9 @@ function App() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    client.get("/api/user")
+    client.get("/api/user", {
+        headers: headers
+        })
     .then(function(res) {
       setCurrentUser(true);
     })
@@ -50,6 +56,9 @@ function App() {
     client.post(
       "/api/register",
       {
+        headers: headers
+        },
+      {
         email: email,
         username: username,
         password: password
@@ -57,6 +66,9 @@ function App() {
     ).then(function(res) {
       client.post(
         "/api/login",
+        {
+          headers: headers
+          },
         {
           email: email,
           password: password
@@ -71,6 +83,9 @@ function App() {
     e.preventDefault();
     client.post(
       "/api/login",
+      {
+        headers: headers
+        },
       {
         email: email,
         password: password
