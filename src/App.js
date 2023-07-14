@@ -56,22 +56,23 @@ function App() {
     client.post(
       "/api/register",
       {
-        headers: headers
-        },
-      {
         email: email,
         username: username,
         password: password
+      },
+      {
+        headers: headers
       }
+      
     ).then(function(res) {
       client.post(
         "/api/login",
         {
-          headers: headers
-          },
-        {
           email: email,
           password: password
+        },
+        {
+          headers: headers
         }
       ).then(function(res) {
         setCurrentUser(true);
@@ -84,11 +85,11 @@ function App() {
     client.post(
       "/api/login",
       {
-        headers: headers
-        },
-      {
         email: email,
         password: password
+      },
+      {
+        headers: headers
       }
     ).then(function(res) {
       setCurrentUser(true);
