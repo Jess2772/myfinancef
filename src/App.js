@@ -53,6 +53,7 @@ function App() {
 
   function submitRegistration(e) {
     e.preventDefault();
+    console.log("register")
     client.post(
       "/api/register",
       {
@@ -75,6 +76,7 @@ function App() {
 
   function submitLogin(e) {
     e.preventDefault();
+    console.log("here");
     client.post(
       "/api/login",
       {
