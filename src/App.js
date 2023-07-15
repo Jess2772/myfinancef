@@ -32,7 +32,7 @@ function App() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    client.get("/api/user", {withCredentials: true})
+    client.get("/api/user")
     .then(function(res) {
       setCurrentUser(true);
     })
@@ -59,16 +59,14 @@ function App() {
         email: email,
         username: username,
         password: password
-      },
-      {withCredentials: true}
+      }
     ).then(function(res) {
       client.post(
         "/api/login",
         {
           email: email,
           password: password
-        },
-        {withCredentials: true}
+        }
       ).then(function(res) {
         setCurrentUser(true);
       });
@@ -82,8 +80,7 @@ function App() {
       {
         email: email,
         password: password
-      },
-      {withCredentials: true}
+      }
     ).then(function(res) {
       setCurrentUser(true);
     });
