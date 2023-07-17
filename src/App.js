@@ -17,12 +17,6 @@ const client = axios.create({
   baseURL: "https://myfinancejb-2225ee8966e8.herokuapp.com/"
 });
 
-// const corsHeaders = {
-//   'Accept': 'application/json',
-//   "Access-Control-Allow-Origin": "*",
-//   'Access-Control-Allow-Credentials': true
-// }
-
 function App() {
 
   const [currentUser, setCurrentUser] = useState();
