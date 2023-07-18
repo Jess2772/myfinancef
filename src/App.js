@@ -19,18 +19,6 @@ const client = axios.create({
 });
 
 function App() {
-
-  useEffect(() => {
-    client.get("/api/user")
-    .then(function(res) {
-      setCurrentUser(true);
-    })
-    .catch(function(error) {
-      setCurrentUser(false);
-    });
-  }, []);
-
-
   return (
     <div>
       <Navbar bg="light" variant="light">

@@ -19,7 +19,7 @@ const client = axios.create({
 
 function Login() {
 
-//   const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState();
 //   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
 //   const [username, setUsername] = useState('');
