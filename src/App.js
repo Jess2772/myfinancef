@@ -49,11 +49,11 @@ function App() {
     <div>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand>MyFinance</Navbar.Brand>
+          <Link to="/" style={{ textDecoration: 'none' }}><Navbar.Brand>MyFinance</Navbar.Brand></Link>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">            
             <Navbar.Text>
-              <Link to="/login" className="btn btn-outline-dark">Log in</Link>
+              <Link to="/login" className="btn btn-outline-dark">Sign in</Link>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -65,13 +65,13 @@ function App() {
               "Take control of YourFinance",
               1000,
               "Take control of yourself",
-              1000,
+              1500,
               "Take control of your money",
-              1000,
+              1500,
             ]}
-            speed={50}
+            speed={45}
             repeat={Infinity}
-            style={{ fontSize: '2em' }}
+            style={{ fontSize: '2em', paddingTop: '1em' }}
           />
         </p>
         <Link className="center" to="/register"><Button className="center" size="lg" type="submit">
