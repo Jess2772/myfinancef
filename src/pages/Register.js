@@ -7,8 +7,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {
-    Routes,
-    Route,
     Link
   } from "react-router-dom";
 axios.defaults.xsrfCookieName = 'csrftoken';

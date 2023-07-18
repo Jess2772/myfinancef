@@ -14,17 +14,11 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const client = axios.create({
-  baseURL: "http://127.0.0.1:8000"
-  //baseURL: "https://myfinancejb-2225ee8966e8.herokuapp.com/"
+  //baseURL: "http://127.0.0.1:8000"
+  baseURL: "https://myfinancejb-2225ee8966e8.herokuapp.com/"
 });
 
 function App() {
-
-  const [currentUser, setCurrentUser] = useState();
-  const [registrationToggle, setRegistrationToggle] = useState(false);
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   useEffect(() => {
     client.get("/api/user")

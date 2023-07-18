@@ -19,10 +19,10 @@ const client = axios.create({
 
 function Login() {
 
-  const [currentUser, setCurrentUser] = useState();
-  const [registrationToggle, setRegistrationToggle] = useState(false);
+//   const [currentUser, setCurrentUser] = useState();
+//   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+//   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
@@ -35,15 +35,15 @@ function Login() {
     });
   }, []);
 
-  function update_form_btn() {
-    if (registrationToggle) {
-      document.getElementById("form_btn").innerHTML = "Register";
-      setRegistrationToggle(false);
-    } else {
-      document.getElementById("form_btn").innerHTML = "Log in";
-      setRegistrationToggle(true);
-    }
-  }
+//   function update_form_btn() {
+//     if (registrationToggle) {
+//       document.getElementById("form_btn").innerHTML = "Register";
+//       setRegistrationToggle(false);
+//     } else {
+//       document.getElementById("form_btn").innerHTML = "Log in";
+//       setRegistrationToggle(true);
+//     }
+//   }
 
   function submitLogin(e) {
     e.preventDefault();
