@@ -5,15 +5,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Register from './pages/Register'
-import Home from './pages/Home'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import Link from "react-router-dom";
 import { TypeAnimation } from 'react-type-animation';
 
 
