@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Welcome from './pages/Welcome'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
@@ -17,6 +18,7 @@ root.render(
       <Route path="/register" element={<Register />}/>
       <Route path="/" element={<App />}/>
       <Route path="/login" element={<Login />}/>
+      <Route path="/welcome" element={<Welcome />}/>
     </Routes>
   </Router>
 );

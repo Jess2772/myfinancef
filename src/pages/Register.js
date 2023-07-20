@@ -1,25 +1,16 @@
 import '../App.css';
 import React from 'react';
 import { useState } from 'react';
-import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {
-    Link
-  } from "react-router-dom";
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
-const client = axios.create({
-  //baseURL: "http://127.0.0.1:8000"
-  baseURL: "https://myfinancejb-2225ee8966e8.herokuapp.com/"
-});
+import { Link } from "react-router-dom";
+import client from '../apis/Client'
+import { useNavigate } from "react-router-dom";
 
 function Register() {
-
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -43,6 +34,7 @@ function Register() {
             password: password
             }
         ).then(function(res) {
+            navigate('/welcome');
             setCurrentUser(true);
         });
     });

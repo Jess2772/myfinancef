@@ -1,16 +1,10 @@
 import './App.css';
 import React from 'react';
-import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import { TypeAnimation } from 'react-type-animation';
-
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
 
 function App() {
   return (
@@ -42,7 +36,7 @@ function App() {
             style={{ fontSize: '2em', paddingTop: '1em' }}
           />
         </p>
-        <Link className="center" to="/register"><Button className="center" size="lg" type="submit">
+        <Link style={{ textDecoration: 'none'}} className="center" to="/register"><Button className="center" size="lg" type="submit">
           Get started
         </Button></Link>
       </div>
