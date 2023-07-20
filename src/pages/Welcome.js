@@ -23,8 +23,8 @@ function Welcome() {
         const { data } = await client.get(`api/user`, {headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        }});
+            //'X-CSRFToken': csrftoken
+        }, withCredentials: true});
         setData(data);
     };
 
