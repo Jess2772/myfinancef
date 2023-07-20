@@ -19,6 +19,7 @@ function Welcome() {
         return cookieValue;
     }
     var csrftoken = getCookie('csrftoken');
+    console.log(csrftoken)
     const getData = async () => {
         const { data } = await client.get(`api/user`, {headers: {
             'Accept': 'application/json',
