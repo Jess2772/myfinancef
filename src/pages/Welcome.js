@@ -4,7 +4,7 @@ import axios from 'axios';
 function Welcome() {
     const [data, setData] = useState([]);
     const getData = async () => {
-        const { data } = await client.get(`api/user`);
+        const { data } = await client.get(`api/user`, {withCredentials: true});
         setData(data);
     };
 
