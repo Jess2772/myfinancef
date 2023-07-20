@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import client from '../apis/Client'
 import { useNavigate } from "react-router-dom";
-
+import jQuery from 'jquery'
 
 
 function Login() {
