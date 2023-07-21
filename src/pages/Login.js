@@ -64,10 +64,10 @@ function Login() {
         email: email,
         password: password
       },
-      {headers: {
-        'Accept': 'application/json',
+      { headers: {
+          'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRFToken': '{{csrftoken}}'
+            'X-CSRFToken': csrftoken
       }}
     ).then(function(res) {
       setCurrentUser(true);
