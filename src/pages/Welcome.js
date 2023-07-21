@@ -27,7 +27,7 @@ function Welcome() {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
-        }, withCredentials: true});
+        }, withCredentials: true, crossDomain: true});
         setData(data);
     };
 

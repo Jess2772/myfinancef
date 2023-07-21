@@ -65,10 +65,10 @@ function Login() {
         password: password
       },
       { headers: {
-          'Accept': 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
-      }}
+      }, withCredentials: true, crossDomain: true}
     ).then(function(res) {
       setCurrentUser(true);
       navigate('/welcome');
