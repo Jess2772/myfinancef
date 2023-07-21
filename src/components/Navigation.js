@@ -18,11 +18,11 @@ function Navigation() {
             <Container>
                 <Navbar.Brand href="/">MyFinance</Navbar.Brand>  
                 <Nav className="me-auto"> 
-                    {isAuth ? <Nav.Link href="/">Home</Nav.Link> : null}
+                    {isAuth ? <Link to="/">Home</Link> : null}
                 </Nav>
                 <Nav>
-                    {isAuth ? <Nav.Link href="/logout">Sign out</Nav.Link> :  
-                            <Nav.Link href="/login">Sign in</Nav.Link>}
+                    {isAuth ? <Link to="/logout">Sign out</Link> :  
+                            <Link to="/login">Sign in</Link>}
                 </Nav>
             </Container>
         </Navbar>
