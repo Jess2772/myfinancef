@@ -35,8 +35,8 @@ function Login() {
     localStorage.setItem('access_token', data.access);         
     localStorage.setItem('refresh_token', data.refresh);         
     client.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
-    window.location.href = '/'       
-    //navigate('/home')
+    //window.location.href = '/'       
+    navigate('/home')
   }
 
 

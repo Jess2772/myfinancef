@@ -1,6 +1,10 @@
 import {useEffect, useState} from "react"
 import client from "../apis/Client";
-const Logout = () => {   
+import { useNavigate } from "react-router-dom";
+
+  
+const Logout = () => {
+    const navigate = useNavigate();
     useEffect(() => {       
         (async () => {         
             try {
@@ -11,7 +15,7 @@ const Logout = () => {
                  {withCredentials: true, crossDomain: true});           
                 localStorage.clear();
             client.defaults.headers.common['Authorization'] = null;
-           window.location.href = '/'
+           navigate('/')
            } catch (e) {
              console.log('logout not working', e)
            }
