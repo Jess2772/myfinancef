@@ -33,9 +33,7 @@ function Welcome() {
 
     useEffect(() => {
         getData();
-      }, []);   
-    
-    console.log(data)
+      }, []);
 
     return (
         <div>
