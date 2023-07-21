@@ -4,11 +4,14 @@ import axios from "axios";
 import client from '../apis/Client'
 // Define the Login function.
 import jwt_decode from "jwt-decode"
+import { useNavigate } from "react-router-dom";
+    
 const Home = () => {     
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
     useEffect(() => {        
         if (localStorage.getItem('access_token') === null){
-            window.location.href = '/login'
+            navigate('/login')
         } else {         
             (async () => {           
                 try {             
@@ -25,10 +28,10 @@ const Home = () => {
           }         
           })()};     
         }, []);
-        const userid = jwt_decode(localStorage.getItem('access_token')).user_id
+        const username = jwt_decode(localStorage.getItem('access_token')).username
         return (
             <div className="form-signin mt-5 text-center">
-                <h3>Hi {message}, {userid}</h3>
+                <h3>Hi {username} </h3>
             </div>
         )
 }

@@ -17,29 +17,33 @@ function Register() {
     const [password, setPassword] = useState('');
     const [currentUser, setCurrentUser] = useState();
 
-    function submitRegistration(e) {
+    const submitRegistration = async e => {
         e.preventDefault();
-        console.log("register")
-        client.post(
-        "/api/register",
-        {
-            email: email,
-            username: username,
-            password: password
-        }
-        ).then(function(res) {
-        client.post(
-            "/api/login",
+        const {data} = await client.post(
+            "/api/register",
             {
+                email: email,
+                username: username,
+                password: password
+            }).then(client.post(
+          "/api/token/",
+          {
             email: email,
             password: password
-            }
-        ).then(function(res) {
-            navigate('/welcome');
-            setCurrentUser(true);
-        });
-    });
-    }
+          },
+          { headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+          }, withCredentials: true, crossDomain: true}
+        ))
+    
+        localStorage.clear();         
+        localStorage.setItem('access_token', data.access);         
+        localStorage.setItem('refresh_token', data.refresh);         
+        client.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+        //window.location.href = '/'       
+        navigate('/home')
+      }
 
     return (
         <div>
