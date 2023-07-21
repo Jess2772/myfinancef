@@ -14,52 +14,13 @@ import jQuery from 'jquery'
 function Login() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState();
-//   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
-//   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // when you make get call, you should get user info?
-  useEffect(() => {
-    client.get("/api/user")
-    .then(function(res) {
-      setCurrentUser(true);
-    })
-    .catch(function(error) {
-      setCurrentUser(false);
-    });
-  }, []);
-
-  // function update_form_btn() {
-  //   if (registrationToggle) {
-  //     document.getElementById("form_btn").innerHTML = "Register";
-  //     setRegistrationToggle(false);
-  //   } else {
-  //     document.getElementById("form_btn").innerHTML = "Log in";
-  //     setRegistrationToggle(true);
-  //   }
-  // }
-  const [data, setData] = useState([]);
-  function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-              var cookie = jQuery.trim(cookies[i]);
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
-      }
-      return cookieValue;
-  }
-  var csrftoken = getCookie('csrftoken');
-  function submitLogin(e) {
+  const submitLogin = async e => {
     e.preventDefault();
-    console.log("here");
-    client.post(
-      "/api/login",
+    const {data} = await client.post(
+      "/api/token/",
       {
         email: email,
         password: password
@@ -67,12 +28,15 @@ function Login() {
       { headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
       }, withCredentials: true, crossDomain: true}
-    ).then(function(res) {
-      setCurrentUser(true);
-      navigate('/welcome');
-    });
+    )
+
+    localStorage.clear();         
+    localStorage.setItem('access_token', data.access);         
+    localStorage.setItem('refresh_token', data.refresh);         
+    client.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+    window.location.href = '/'       
+    //navigate('/home')
   }
 
 

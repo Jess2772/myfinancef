@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import client from '../apis/Client'
 import { useNavigate } from "react-router-dom";
+import Nav from 'react-bootstrap/Nav';
 
 function Register() {
     const navigate = useNavigate();
@@ -46,10 +47,13 @@ function Register() {
                 <Container>
                 <Link to="/" style={{ textDecoration: 'none' }}><Navbar.Brand>MyFinance</Navbar.Brand></Link>
                 <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">            
-                    <Navbar.Text>
+                <Navbar.Collapse className="justify-content-end">
+                    <Nav> 
+                        <Nav.Link href="/login">Sign in</Nav.Link>
+                    </Nav>            
+                    {/* <Navbar.Text>
                     <Link to="/login" className="btn btn-outline-dark">Log in</Link>
-                    </Navbar.Text>
+                    </Navbar.Text> */}
                 </Navbar.Collapse>
                 </Container>
             </Navbar>

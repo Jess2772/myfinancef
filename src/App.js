@@ -3,23 +3,19 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
 import { TypeAnimation } from 'react-type-animation';
-
-function App() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import Navigation from './components/Navigation'
+export function App() {
   return (
     <div>
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Link to="/" style={{ textDecoration: 'none' }}><Navbar.Brand>MyFinance</Navbar.Brand></Link>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">            
-            <Navbar.Text>
-              <Link to="/login" className="btn btn-outline-dark">Sign in</Link>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Navigation></Navigation>
       <div>
         <p style={{ fontSize: 50 }} className="center">
           <TypeAnimation
@@ -36,13 +32,12 @@ function App() {
             style={{ fontSize: '2em', paddingTop: '1em' }}
           />
         </p>
-        <Link style={{ textDecoration: 'none'}} className="center" to="/register"><Button className="center" size="lg" type="submit">
+        
+      </div>
+      <Link style={{ textDecoration: 'none'}} className="center" to="/register"><Button className="center" size="lg" type="submit">
           Get started
         </Button></Link>
-      </div>
     </div>
     
   )
 }
-
-export default App;
