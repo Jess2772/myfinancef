@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 const client = axios.create({
     //baseURL: "http://127.0.0.1:8000",
-    baseURL: "http://107.22.57.98:443",
+    baseURL: "https://107.22.57.98:443",
     withCredentials: true,
     xsrfHeaderName: 'X-CSRFToken',
     xsrfCookieName: 'xsrftoken',
