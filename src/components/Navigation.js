@@ -10,7 +10,7 @@ function Navigation() {
         if (localStorage.getItem('access_token') !== null) {
             setIsAuth(true); 
       }    
-    }, [isAuth]);     
+    }, [isAuth]);
 
     return ( 
       <div>      
@@ -18,7 +18,7 @@ function Navigation() {
             <Container>
                 <Navbar.Brand href="/">MyFinance</Navbar.Brand>  
                 <Nav className="me-auto"> 
-                    {isAuth ? <Link to="/">Home</Link> : null}
+                    {isAuth ? <Link to="/home">Home</Link> : null}
                 </Nav>
                 <Nav>
                     {isAuth ? <Link to="/logout">Sign out</Link> :  

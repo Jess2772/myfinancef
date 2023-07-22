@@ -2,10 +2,10 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import client from '../apis/Client'
-// Define the Login function.
 import jwt_decode from "jwt-decode"
-import { useNavigate } from "react-router-dom";
-    
+import { Link, useNavigate } from "react-router-dom";
+import Navigation from '../components/Navigation'
+import Button from 'react-bootstrap/Button';
 const Home = () => {     
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
@@ -27,13 +27,31 @@ const Home = () => {
                     console.log('not auth')
           }         
           })()};     
-        }, []);
-        const username = jwt_decode(localStorage.getItem('access_token')).username
-        return (
-            <div className="form-signin mt-5 text-center">
-                <h3>Hi {username} </h3>
+    }, []);
+    const username = jwt_decode(localStorage.getItem('access_token')).username
+    return (
+        
+        <div>
+            <Navigation></Navigation>
+            <div>
+                <h2 className="center">Hi {username}. How may we assist you today? </h2>
+                <p className="center">{message}</p>
+                <div className="center">
+                    <Link style={{ textDecoration: 'none'}} to="/transactions">
+                        <Button variant= "outline-primary" className="center me-2" size="lg"> Record Transactions </Button>
+                    </Link>
+                    <Link style={{ textDecoration: 'none'}} to="/spendings">
+                        <Button variant= "outline-primary" className="center me-2" size="lg"> View My Spendings </Button>
+                    </Link>
+                    <Link style={{ textDecoration: 'none'}} to="/budget">
+                        <Button variant= "outline-primary" className="center me-2" size="lg"> View/Update My Budget </Button>
+                    </Link>
+                </div>
+                
             </div>
-        )
+
+        </div>
+    )
 }
 
 export default Home;

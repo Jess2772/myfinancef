@@ -15,12 +15,14 @@ const Logout = () => {
                  {withCredentials: true, crossDomain: true});           
                 localStorage.clear();
             client.defaults.headers.common['Authorization'] = null;
-           navigate('/')
+            navigate('/')
            } catch (e) {
              console.log('logout not working', e)
            }
          })();
-    }, []);    return (
+    }, []);    
+    
+    return (
        <div></div>
      )
 }

@@ -36,7 +36,7 @@ export function App() {
       </div>
       <Link style={{ textDecoration: 'none'}} className="center" to="/register"><Button className="center" size="lg" type="submit">
           Get started
-        </Button></Link>
+      </Button></Link>
     </div>
     
   )

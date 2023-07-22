@@ -15,6 +15,9 @@ import {
 } from "react-router-dom";
 import './interceptor/Axios';
 import Logout from './pages/Logout';
+import Budget from './pages/Budget';
+import Spendings from './pages/Spendings';
+import Transactions from './pages/Transactions';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
@@ -29,6 +32,9 @@ root.render(
       <Route path="/welcome" element={<Welcome />}/>
       <Route path="/home" element={<Home />}/>
       <Route path="/logout" element={<Logout />}/>
+      <Route path="/budget" element={<Budget />}/>
+      <Route path="/spendings" element={<Spendings />}/>
+      <Route path="/transactions" element={<Transactions />}/>
     </Routes>
   </Router>
 );
