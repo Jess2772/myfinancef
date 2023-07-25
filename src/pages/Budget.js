@@ -98,71 +98,68 @@ function Budget() {
                         <p className="center mt-3">To update your budget, please re-enter all category limits and press submit</p>
                         <div className="center mt-3">
                             <Form onSubmit={e => submitBudget(e)}>
-                                <Row>
-                                    <Form.Label>Housing Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicHousingLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.housing_lmt} value={housing_lmt} onChange={e => { setHousingLimit(e.target.value)}}/>
-                                    </InputGroup>
+                                
+                                <Form.Label>Housing Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicHousingLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.housing_lmt} value={housing_lmt} onChange={e => { setHousingLimit(e.target.value)}}/>
+                                </InputGroup>
 
-                                    <Form.Label>Utility Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicUtilityLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.utility_lmt} value={utility_lmt} onChange={e => setUtilityLimit(e.target.value)}/>
-                                    </InputGroup>
-                                </Row>
-                                <Row>
-                                    <Form.Label>Transportation Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicTransportationLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.transportation_lmt} value={transportation_lmt} onChange={e => setTransportationLimit(e.target.value)}/>
-                                    </InputGroup>
+                                <Form.Label>Utility Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicUtilityLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.utility_lmt} value={utility_lmt} onChange={e => setUtilityLimit(e.target.value)}/>
+                                </InputGroup>
+                        
+                            
+                                <Form.Label>Transportation Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicTransportationLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.transportation_lmt} value={transportation_lmt} onChange={e => setTransportationLimit(e.target.value)}/>
+                                </InputGroup>
 
-                                    <Form.Label>Grocery Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicGroceryLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.grocery_lmt} value={grocery_lmt} onChange={e => setGroceryLimit(e.target.value)}/>
-                                    </InputGroup>
-                                </Row>
-                                <Row>
-                                    <Form.Label>Healthcare Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicHealthcareLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.healthcare_lmt} value={healthcare_lmt} onChange={e => setHealthcareLimit(e.target.value)}/>
-                                    </InputGroup>
+                                <Form.Label>Grocery Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicGroceryLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.grocery_lmt} value={grocery_lmt} onChange={e => setGroceryLimit(e.target.value)}/>
+                                </InputGroup>
+                            
+                                <Form.Label>Healthcare Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicHealthcareLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.healthcare_lmt} value={healthcare_lmt} onChange={e => setHealthcareLimit(e.target.value)}/>
+                                </InputGroup>
 
-                                    <Form.Label>Dining Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicDiningLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.dining_lmt} value={dining_lmt} onChange={e => setDiningLimit(e.target.value)}/>
-                                    </InputGroup>
-                                </Row>
-                                <Row>
-                                    <Form.Label>Personal Care Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicPersonalCareLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.personal_care_lmt} value={personal_care_lmt} onChange={e => setPersonalcareLimit(e.target.value)}/>
-                                    </InputGroup>
+                                <Form.Label>Dining Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicDiningLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.dining_lmt} value={dining_lmt} onChange={e => setDiningLimit(e.target.value)}/>
+                                </InputGroup>
+                            
+                                <Form.Label>Personal Care Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicPersonalCareLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.personal_care_lmt} value={personal_care_lmt} onChange={e => setPersonalcareLimit(e.target.value)}/>
+                                </InputGroup>
 
-                                    <Form.Label>Entertainment Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicEntertainmentLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.entertainment_lmt} value={entertainment_lmt} onChange={e => setEntertainmentLimit(e.target.value)}/>
-                                    </InputGroup>
-                                </Row>
-                                <Row>
-                                    <Form.Label>Clothing Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicClothingLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.clothing_lmt} value={clothing_lmt} onChange={e => setClothingLimit(e.target.value)}/>
-                                    </InputGroup>
+                                <Form.Label>Entertainment Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicEntertainmentLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.entertainment_lmt} value={entertainment_lmt} onChange={e => setEntertainmentLimit(e.target.value)}/>
+                                </InputGroup>
+                            
+                                <Form.Label>Clothing Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicClothingLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.clothing_lmt} value={clothing_lmt} onChange={e => setClothingLimit(e.target.value)}/>
+                                </InputGroup>
 
-                                    <Form.Label>Miscellaneous Limit</Form.Label>
-                                    <InputGroup className="mb-3" as={Col} controlId="formBasicMiscellaneousLimit">
-                                        <InputGroup.Text>$</InputGroup.Text>
-                                        <Form.Control type="number" step="0.01" placeholder={userBudget.miscellaneous_lmt} value={miscellaneous_lmt} onChange={e => setMiscellaneousLimit(e.target.value)}/>
-                                    </InputGroup>
-                                </Row>
+                                <Form.Label>Miscellaneous Limit</Form.Label>
+                                <InputGroup className="mb-3" as={Col} controlId="formBasicMiscellaneousLimit">
+                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <Form.Control type="number" step="0.01" placeholder={userBudget.miscellaneous_lmt} value={miscellaneous_lmt} onChange={e => setMiscellaneousLimit(e.target.value)}/>
+                                </InputGroup>
+                              
                                 <Button variant="primary" type="submit">
                                     Submit
                                 </Button>
