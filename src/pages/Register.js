@@ -15,33 +15,38 @@ function Register() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [currentUser, setCurrentUser] = useState();
 
     const submitRegistration = async e => {
         e.preventDefault();
-        const {data} = await client.post(
+        const {data1} = await client.post(
             "/api/register",
             {
                 email: email,
                 username: username,
                 password: password
-            }).then(client.post(
-          "/api/token/",
-          {
-            email: email,
-            password: password
-          },
-          { headers: {
+            },
+            { headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-          }, withCredentials: true, crossDomain: true}
-        ))
+            }, withCredentials: true, crossDomain: true}
+        )
+        
+        const {data} = await client.post(
+            "/api/token/",
+            {
+                email: email,
+                password: password
+            },
+            { headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }, withCredentials: true, crossDomain: true}
+        )
     
         localStorage.clear();         
         localStorage.setItem('access_token', data.access);         
         localStorage.setItem('refresh_token', data.refresh);         
-        client.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
-        //window.location.href = '/'       
+        client.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;       
         navigate('/home')
       }
 
@@ -54,10 +59,7 @@ function Register() {
                 <Navbar.Collapse className="justify-content-end">
                     <Nav> 
                         <Nav.Link href="/login">Sign in</Nav.Link>
-                    </Nav>            
-                    {/* <Navbar.Text>
-                    <Link to="/login" className="btn btn-outline-dark">Log in</Link>
-                    </Navbar.Text> */}
+                    </Nav>
                 </Navbar.Collapse>
                 </Container>
             </Navbar>
@@ -84,9 +86,7 @@ function Register() {
                 </Form>
             </div>   
         </div>
-        
     )
-
 }
 
 export default Register;
