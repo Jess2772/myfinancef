@@ -37,6 +37,11 @@ function Transactions() {
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
         )
+        setMerchant('')
+        setAmount('')
+        setCategory('')
+        setPaymentType('')
+        setDate('')
     }
 
 
@@ -74,8 +79,7 @@ function Transactions() {
                                 <option value="Healthcare">Healthcare</option>
                                 <option value="Personal Care">Personal Care</option>
                                 <option value="Clothing">Clothing</option>
-                                <option value="Miscellaneous">Miscellaneous</option>
-                                
+                                <option value="Miscellaneous">Miscellaneous</option>        
                             </Form.Select>
                         </Form.Group>
                         

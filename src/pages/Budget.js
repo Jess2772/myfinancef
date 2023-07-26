@@ -83,8 +83,17 @@ function Budget() {
                 'Content-Type': 'application/json',
           }, withCredentials: true, crossDomain: true}
         )
+        setHousingLimit();
+        setUtilityLimit();
+        setTransportationLimit();
+        setGroceryLimit();
+        setHealthcareLimit();
+        setDiningLimit();
+        setPersonalcareLimit();
+        setEntertainmentLimit();
+        setClothingLimit();
+        setMiscellaneousLimit();
         window.location.reload();
-        //navigate('/budget')
     }
     
     return (
