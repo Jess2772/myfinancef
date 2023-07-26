@@ -1,5 +1,6 @@
 import Navigation from "../components/Navigation";
-import { Row, Col, Form, Button, InputGroup } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
+import Button from '@mui/material/Button';
 import jwt_decode from "jwt-decode"
 import client from "../apis/Client";
 import { useState, useEffect } from "react";
@@ -98,7 +99,7 @@ function Transactions() {
                             <Form.Control type="date" placeholder={date} onChange={e => {setDate(e.target.value)}}/>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="contained" className="center" type="submit">
                             Submit
                         </Button>
                     </Form>

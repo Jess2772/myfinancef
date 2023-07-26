@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import React, { useState, useEffect} from 'react';
 import Container from 'react-bootstrap/Container';
 import { Link, Route, Routes } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 function Navigation() {   
     const [isAuth, setIsAuth] = useState(false);
@@ -18,11 +19,11 @@ function Navigation() {
             <Container>
                 <Navbar.Brand href="/">MyFinance</Navbar.Brand>  
                 <Nav className="me-auto"> 
-                    {isAuth ? <Link to="/home">Home</Link> : null}
+                    {isAuth ? <Link to="/home"><Button variant="contained">Home</Button></Link> : null}
                 </Nav>
                 <Nav>
-                    {isAuth ? <Link to="/logout">Sign out</Link> :  
-                            <Link to="/login">Sign in</Link>}
+                    {isAuth ? <Link to="/logout"><Button variant="contained">Sign out</Button></Link> :  
+                            <Link to="/login"><Button variant="contained">Sign in</Button></Link>}
                 </Nav>
             </Container>
         </Navbar>

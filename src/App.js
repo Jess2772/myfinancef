@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 import { TypeAnimation } from 'react-type-animation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -34,7 +34,7 @@ export function App() {
         </p>
         
       </div>
-      <Link style={{ textDecoration: 'none'}} className="center" to="/register"><Button className="center" size="lg" type="submit">
+      <Link style={{ textDecoration: 'none'}} className="center" to="/register"><Button variant="contained" className="center" size="large" type="submit">
           Get started
       </Button></Link>
     </div>

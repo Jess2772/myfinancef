@@ -5,7 +5,11 @@ import client from '../apis/Client'
 import jwt_decode from "jwt-decode"
 import { Link, useNavigate } from "react-router-dom";
 import Navigation from '../components/Navigation'
-import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import PaidIcon from '@mui/icons-material/Paid';
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 const Home = () => {     
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
@@ -38,13 +42,13 @@ const Home = () => {
                 <p className="center">{message}</p>
                 <div className="center">
                     <Link style={{ textDecoration: 'none'}} to="/transactions">
-                        <Button variant= "outline-primary" className="center me-2" size="lg"> Record Transactions </Button>
+                        <Button endIcon={<PointOfSaleIcon />} variant="contained" size="large" className="center me-2"> Record Transactions </Button>
                     </Link>
                     <Link style={{ textDecoration: 'none'}} to="/spendings">
-                        <Button variant= "outline-primary" className="center me-2" size="lg"> View My Spendings </Button>
+                        <Button endIcon={<RequestQuoteIcon />} variant="contained" size="large" className="center me-2"> View My Spendings </Button>
                     </Link>
                     <Link style={{ textDecoration: 'none'}} to="/budget">
-                        <Button variant= "outline-primary" className="center me-2" size="lg"> View/Update My Budget </Button>
+                        <Button endIcon={<AccountBalanceWalletIcon />} variant="contained" size="large" className="center me-2"> View/Update My Budget </Button>
                     </Link>
                 </div>
                 

@@ -3,13 +3,18 @@ import React from 'react';
 import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import client from '../apis/Client'
 import { useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import FormGroup from '@mui/material/FormGroup';
+import FormHelperText from '@mui/material/FormHelperText';
+import Input from '@mui/material/Input';
 function Register() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -58,31 +63,37 @@ function Register() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Nav> 
-                        <Nav.Link href="/login">Sign in</Nav.Link>
+                        <Link to="/login"><Button variant="contained">Sign in</Button></Link>
                     </Nav>
                 </Navbar.Collapse>
                 </Container>
             </Navbar>
             <div className="center">
                 <Form onSubmit={e => submitRegistration(e)}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                    <FormGroup className="mb-3" controlId="formBasicEmail">
+                        <FormControl placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)}>
+                            <TextField variant="outlined" label="Email" type="email" />
+                            <FormHelperText id="my-helper-text">
+                            We'll never share your email with anyone else.
+                            </FormHelperText>
+                        </FormControl>
+                    </FormGroup>
+
+                    <FormGroup className="mb-3" controlId="formBasicUsername">
+                        <FormControl placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)}>
+                            <TextField variant="standard" label="Username" />
+                        </FormControl>
+                    </FormGroup>
+
+                    <FormGroup className="mt-4" controlId="formBasicPassword">
+                        <FormControl placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)}>
+                            <TextField variant="filled" label="Password" type="password" />
+                        </FormControl>
+                    </FormGroup>
+
+                    <Button variant="contained" className="mt-3 center" type="submit">
+                        Submit
+                    </Button>
                 </Form>
             </div>   
         </div>

@@ -6,7 +6,8 @@ import axios from "axios";
 import client from '../apis/Client'
 import jwt_decode from "jwt-decode"
 import { Link, useNavigate } from "react-router-dom";
-import { Row, Col, Form, Button, InputGroup} from 'react-bootstrap'
+import { Row, Col, Form, InputGroup} from 'react-bootstrap'
+import Button from '@mui/material/Button';
 function Budget() {
     const [userBudget, setUserBudget] = useState('');
     const [activeBudget, setActiveBudget] = useState(true);
@@ -168,7 +169,8 @@ function Budget() {
                                     <Form.Control type="number" step="0.01" placeholder={userBudget.miscellaneous_lmt} value={miscellaneous_lmt} onChange={e => setMiscellaneousLimit(e.target.value)}/>
                                 </InputGroup>
                               
-                                <Button variant="primary" type="submit">
+                                
+                                <Button variant="contained" className="center" type="submit">
                                     Submit
                                 </Button>
                             </Form>
@@ -245,7 +247,8 @@ function Budget() {
                                         <Form.Control type="number" step="0.01" value={miscellaneous_lmt} onChange={e => setMiscellaneousLimit(e.target.value)}/>
                                     </InputGroup>
                                 </Row>
-                                <Button variant="primary" type="submit">
+                                
+                                <Button variant="contained" className="center" type="submit">
                                     Submit
                                 </Button>
                             </Form>

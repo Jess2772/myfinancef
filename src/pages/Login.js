@@ -3,14 +3,18 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import client from '../apis/Client'
 import { useNavigate } from "react-router-dom";
 import jQuery from 'jquery'
-
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import FormGroup from '@mui/material/FormGroup';
+import FormHelperText from '@mui/material/FormHelperText';
+import Input from '@mui/material/Input';
 function Login() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState();
@@ -48,25 +52,29 @@ function Login() {
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">            
                 <Navbar.Text>
-                <Link to="/register" className="btn btn-outline-dark">Sign up</Link>
+                <Link to="/register"><Button variant="contained">Sign Up</Button></Link>
                 </Navbar.Text>
             </Navbar.Collapse>
             </Container>
       </Navbar>
         <div className="center">
           <Form onSubmit={e => submitLogin(e)}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <Button variant="primary" type="submit">
+            <FormGroup className="mb-3" controlId="formBasicEmail">
+              <FormControl placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)}>
+                <TextField variant="outlined" label="Email" type="email" />
+                <FormHelperText id="my-helper-text">
+                  We'll never share your email with anyone else.
+                </FormHelperText>
+              </FormControl>
+            </FormGroup>
+
+            <FormGroup className="mt-4" controlId="formBasicPassword">
+              <FormControl placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)}>
+                <TextField variant="filled" label="Password" type="password" />
+              </FormControl>
+            </FormGroup>
+
+            <Button variant="contained" className="mt-3 center" type="submit">
               Submit
             </Button>
           </Form>
