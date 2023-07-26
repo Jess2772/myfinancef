@@ -31,7 +31,6 @@ function Budget() {
             navigate('/login')
         } else {         
             (async () => { 
-                console.log(localStorage.getItem('access_token'))
                 const user_id = jwt_decode(localStorage.getItem('access_token')).user_id
                 return await client.post(
                     'api/user/budget',
