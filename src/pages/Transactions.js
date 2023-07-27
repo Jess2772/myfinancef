@@ -11,11 +11,13 @@ import InputLabel from '@mui/material/InputLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import InputAdornment from '@mui/material/InputAdornment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import dayjs, { Dayjs } from 'dayjs';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 function Transactions() {
     const [merchant, setMerchant] = useState()
     const [amount, setAmount] = useState()
@@ -33,6 +35,7 @@ function Transactions() {
     const submitTransaction = async e => {
         const user_id = jwt_decode(localStorage.getItem('access_token')).user_id
         e.preventDefault();
+        console.log(date)
         const {data} = await client.post(
             "/api/user/transaction",
             {   
@@ -49,7 +52,7 @@ function Transactions() {
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
         )
-        window.location.reload();
+        //window.location.reload();
     }
 
 
@@ -62,20 +65,28 @@ function Transactions() {
                     <Form onSubmit={e => submitTransaction(e)}>
                         <FormGroup className="mb-3" controlId="formBasicMerchant">
                             <FormControl placeholder="Merchant" value={merchant} onChange={e => setMerchant(e.target.value)}>
-                                <TextField variant="standard" label="Merchant" />
+                                <TextField variant="filled" label="Merchant" />
                             </FormControl>
                         </FormGroup>
 
                         <FormGroup className="mb-3" controlId="formBasicAmount">
                             <FormControl value={amount} onChange={e => setAmount(e.target.value)} >
-                                <TextField variant="standard" type="number" label="Amount" inputProps={{ step: "0.01" }}/>
+                                <TextField variant="filled" type="number" label="Amount" InputProps={{startAdornment: (
+                                    <InputAdornment position="start">
+                                    $
+                                    </InputAdornment>
+                                ), inputProps: {
+                                    min: 0, step: 0.01
+                                } }}/>
                             </FormControl>
                         </FormGroup>
+                        
                         
                         <FormGroup className="mb-3" controlId="formBasicCategory">
                             <FormControl>
                                 <InputLabel>Category</InputLabel>
                                 <Select
+                                    defaultValue=""
                                     value={category}
                                     label="Category"
                                     onChange={e => {setCategory(e.target.value)}}>
@@ -96,6 +107,7 @@ function Transactions() {
                             <FormControl >
                                 <InputLabel>Payment Method</InputLabel>
                                 <Select
+                                    defaultValue=""
                                     value={paymentType}
                                     label="PaymentMethod"
                                     onChange={e => {setPaymentType(e.target.value)}}>
@@ -108,10 +120,13 @@ function Transactions() {
 
                         <FormGroup className="mb-3" controlId="formBasicDate">
                             <LocalizationProvider dateAdapter={AdapterDateFns} >
+                            
                                 <FormControl value={date} onChange={e => setDate(e.target.value)} >
                                     <TextField type="date" />
+                                    {/* <DateField format="YYYY-MM-DD" label="Date Picker" */}
+                                    
                                 </FormControl>
-                                {/* <DateField format="YYYY-MM-DD" label="Date Picker" value={date} onChange={e => setDate(e.target.value)}/> */}
+                                
                             </LocalizationProvider>
                         </FormGroup>
 
