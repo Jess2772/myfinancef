@@ -49,7 +49,7 @@ function Transactions() {
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
         )
-        // window.location.reload();
+        window.location.reload();
     }
 
 
