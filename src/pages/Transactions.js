@@ -5,12 +5,23 @@ import jwt_decode from "jwt-decode"
 import client from "../apis/Client";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import dayjs, { Dayjs } from 'dayjs';
 function Transactions() {
     const [merchant, setMerchant] = useState()
     const [amount, setAmount] = useState()
     const [category, setCategory] = useState()
     const [paymentType, setPaymentType] = useState()
-    const [date, setDate] = useState()
+    const [date, setDate] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {        
@@ -38,11 +49,7 @@ function Transactions() {
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
         )
-        setMerchant('')
-        setAmount('')
-        setCategory('')
-        setPaymentType('')
-        setDate('')
+        // window.location.reload();
     }
 
 
@@ -53,51 +60,60 @@ function Transactions() {
                 <h2 className="center mt-3">Record a transaction</h2>
                 <div className="center mt-3">
                     <Form onSubmit={e => submitTransaction(e)}>
-    
-                        <Form.Group className="mb-3 col-md-12" as={Col} controlId="formBasicMerchant">
-                            <Form.Label>Merchant</Form.Label>
-                            <Form.Control type="text" placeholder="Merchant" value={merchant} onChange={e => { setMerchant(e.target.value)}}/>
-                        </Form.Group>
+                        <FormGroup className="mb-3" controlId="formBasicMerchant">
+                            <FormControl placeholder="Merchant" value={merchant} onChange={e => setMerchant(e.target.value)}>
+                                <TextField variant="standard" label="Merchant" />
+                            </FormControl>
+                        </FormGroup>
 
-                        <Form.Label>Amount</Form.Label>
-                        <Form.Group className="mb-3" as={Col} controlId="formBasicAmount">
-                            <InputGroup>
-                                <InputGroup.Text>$</InputGroup.Text>
-                                <Form.Control type="number" step="0.01" placeholder="0.00" value={amount} onChange={e => {setAmount(e.target.value)}}/>
-                            </InputGroup>
-                        </Form.Group>
-
-                        <Form.Label>Category</Form.Label>
-                        <Form.Group className="mb-3" as={Col} controlId="formBasicCategory">
-                            <Form.Select custom value={category} onChange={e => {setCategory(e.target.value)}}>
-                                <option value="" selected disabled>Please select</option>
-                                <option value="Grocery">Grocery</option>
-                                <option value="Housing">Housing</option>
-                                <option value="Entertainment">Entertainment</option>
-                                <option value="Utility">Utility</option>
-                                <option value="Transportation">Transportation</option>
-                                <option value="Dining">Dining</option>
-                                <option value="Healthcare">Healthcare</option>
-                                <option value="Personal Care">Personal Care</option>
-                                <option value="Clothing">Clothing</option>
-                                <option value="Miscellaneous">Miscellaneous</option>        
-                            </Form.Select>
-                        </Form.Group>
+                        <FormGroup className="mb-3" controlId="formBasicAmount">
+                            <FormControl value={amount} onChange={e => setAmount(e.target.value)} >
+                                <TextField variant="standard" type="number" label="Amount" inputProps={{ step: "0.01" }}/>
+                            </FormControl>
+                        </FormGroup>
                         
-                        <Form.Label>Payment Method</Form.Label>
-                        <Form.Group className="mb-3" as={Col} controlId="formBasicPayment">
-                            <Form.Select custom value={paymentType} onChange={e => {setPaymentType(e.target.value)}}>
-                                <option value="" selected disabled>Please select</option>
-                                <option value="CC">Credit Card</option>
-                                <option value="DC">Debit Card</option>
-                                <option value="CH">Cash</option>
-                            </Form.Select>
-                        </Form.Group>    
+                        <FormGroup className="mb-3" controlId="formBasicCategory">
+                            <FormControl>
+                                <InputLabel>Category</InputLabel>
+                                <Select
+                                    value={category}
+                                    label="Category"
+                                    onChange={e => {setCategory(e.target.value)}}>
+                                    <MenuItem value="Grocery">Grocery</MenuItem>
+                                    <MenuItem value="Housing">Housing</MenuItem>
+                                    <MenuItem value="Entertainment">Entertainment</MenuItem>
+                                    <MenuItem value="Utility">Utility</MenuItem>
+                                    <MenuItem value="Dining">Dining</MenuItem>
+                                    <MenuItem value="Healthcare">Healthcare</MenuItem>
+                                    <MenuItem value="Personal Care">Personal Care</MenuItem>
+                                    <MenuItem value="Clothing">Clothing</MenuItem>
+                                    <MenuItem value="Miscellaneous">Miscellaneous</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </FormGroup>
+                              
+                        <FormGroup className="mb-3" controlId="formBasicPayment">
+                            <FormControl >
+                                <InputLabel>Payment Method</InputLabel>
+                                <Select
+                                    value={paymentType}
+                                    label="PaymentMethod"
+                                    onChange={e => {setPaymentType(e.target.value)}}>
+                                    <MenuItem value="CC">Credit Card</MenuItem>
+                                    <MenuItem value="DC">Debit Card</MenuItem>
+                                    <MenuItem value="CH">Cash</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </FormGroup>
 
-                        <Form.Group className="mb-3" as={Col} controlId="formBasicDate">
-                            <Form.Label>Date</Form.Label>
-                            <Form.Control type="date" placeholder={date} onChange={e => {setDate(e.target.value)}}/>
-                        </Form.Group>
+                        <FormGroup className="mb-3" controlId="formBasicDate">
+                            <LocalizationProvider dateAdapter={AdapterDateFns} >
+                                <FormControl value={date} onChange={e => setDate(e.target.value)} >
+                                    <TextField type="date" />
+                                </FormControl>
+                                {/* <DateField format="YYYY-MM-DD" label="Date Picker" value={date} onChange={e => setDate(e.target.value)}/> */}
+                            </LocalizationProvider>
+                        </FormGroup>
 
                         <Button variant="contained" className="center" type="submit">
                             Submit
