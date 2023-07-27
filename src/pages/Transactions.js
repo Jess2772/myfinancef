@@ -61,7 +61,7 @@ function Transactions() {
             <Navigation></Navigation>
             <div>
                 <h2 className="center mt-3">Record a transaction</h2>
-                <div className="center mt-3">
+                <div style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} className="mt-3">
                     <Form onSubmit={e => submitTransaction(e)}>
                         <FormGroup className="mb-3" controlId="formBasicMerchant">
                             <FormControl placeholder="Merchant" value={merchant} onChange={e => setMerchant(e.target.value)}>

@@ -102,9 +102,8 @@ function Budget() {
                     <div>
                         <h2 className="center mt-3">Budget: ${userBudget.budget} ({userBudget.frequency})</h2>
                         <p className="center mt-3">To update your budget, please re-enter all category limits and press submit</p>
-                        <div className="center mt-3">
+                        <div style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} className="mt-3">
                             <Form onSubmit={e => submitBudget(e)}>
-
                                 <FormGroup className="mb-3" controlId="formBasicHousingLimit">
                                     <FormControl value={housing_lmt} onChange={e => setHousingLimit(e.target.value)} >
                                         <TextField placeholder={userBudget.housing_lmt} variant="outlined" type="number" label="Housing Limit" InputProps={{startAdornment: (
