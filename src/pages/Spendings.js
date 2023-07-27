@@ -151,7 +151,7 @@ function Spendings() {
                                     {transaction.merchant}
                                 </TableCell>
                                 <TableCell align="right">{transaction.category}</TableCell>
-                                <TableCell align="right">{transaction.amount}</TableCell>
+                                <TableCell align="right">{transaction.amount.toFixed(2)}</TableCell>
                                 <TableCell align="right">{transaction.transaction_date}</TableCell>
                                 <TableCell align="right">{transaction.pymt_method_full}</TableCell>
                             </TableRow>

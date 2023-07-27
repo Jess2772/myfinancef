@@ -18,6 +18,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import dayjs, { Dayjs } from 'dayjs';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import moment from 'moment';
 function Transactions() {
     const [merchant, setMerchant] = useState()
     const [amount, setAmount] = useState()
@@ -44,7 +45,7 @@ function Transactions() {
                 amount: amount,
                 category: category,
                 pymt_method: paymentType,
-                transaction_date: date
+                transaction_date: moment(date).format('YYYY-MM-DD')
 
             }, 
             { headers: {
@@ -122,9 +123,18 @@ function Transactions() {
                             <LocalizationProvider dateAdapter={AdapterDateFns} >
                             
                                 <FormControl value={date} onChange={e => setDate(e.target.value)} >
-                                    <TextField type="date" />
+                                    {/* <TextField type="date" label="Date" placeholder=""/> */}
                                     {/* <DateField format="YYYY-MM-DD" label="Date Picker" */}
-                                    
+                                    <DatePicker
+                                            format="yyyy-MM-dd"
+                                            label="Date"
+                                            value={date}
+                                            
+                                            onChange={(newValue) => {
+                                                setDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField placeholder="" {...params} />}
+                                    />
                                 </FormControl>
                                 
                             </LocalizationProvider>
