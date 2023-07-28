@@ -14,13 +14,24 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormHelperText from '@mui/material/FormHelperText';
-import Input from '@mui/material/Input';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 function Register() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = React.useState(false);
 
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+    };
+    
     const submitRegistration = async e => {
         e.preventDefault();
         const {data1} = await client.post(
@@ -85,10 +96,28 @@ function Register() {
                         </FormControl>
                     </FormGroup>
 
-                    <FormGroup className="mt-4" controlId="formBasicPassword">
-                        <FormControl placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)}>
-                            <TextField variant="filled" label="Password" type="password" />
-                        </FormControl>
+                    <FormGroup className="mt-4">
+                    <FormControl variant="outlined" value={password}>
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={e => setPassword(e.target.value)}
+                        endAdornment={
+                            <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                            </InputAdornment>
+                        }
+                        label="Password"
+                        />
+                    </FormControl>
                     </FormGroup>
 
                     <Button variant="contained" className="mt-3 center" type="submit">

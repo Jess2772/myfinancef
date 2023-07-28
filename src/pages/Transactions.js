@@ -16,9 +16,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import dayjs, { Dayjs } from 'dayjs';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import moment from 'moment';
+import Autocomplete from '@mui/material/Autocomplete';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+
+
 function Transactions() {
     const [merchant, setMerchant] = useState()
     const [amount, setAmount] = useState()
@@ -53,9 +56,11 @@ function Transactions() {
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
         )
-        //window.location.reload();
+ 
+        window.location.reload();
     }
 
+    const categories = ['Grocery', 'Entertainment', 'Utility', 'Dining', 'Healthcare', 'Personal Care', 'Clothing', 'Miscellaneous']
 
     return (
         <div>
@@ -66,7 +71,7 @@ function Transactions() {
                     <Form onSubmit={e => submitTransaction(e)}>
                         <FormGroup className="mb-3" controlId="formBasicMerchant">
                             <FormControl placeholder="Merchant" value={merchant} onChange={e => setMerchant(e.target.value)}>
-                                <TextField variant="filled" label="Merchant" />
+                                <TextField sx={{ width: 350 }} variant="filled" label="Merchant" />
                             </FormControl>
                         </FormGroup>
 
@@ -81,29 +86,17 @@ function Transactions() {
                                 } }}/>
                             </FormControl>
                         </FormGroup>
-                        
-                        
-                        <FormGroup className="mb-3" controlId="formBasicCategory">
-                            <FormControl>
-                                <InputLabel>Category</InputLabel>
-                                <Select
-                                    defaultValue=""
-                                    value={category}
-                                    label="Category"
-                                    onChange={e => {setCategory(e.target.value)}}>
-                                    <MenuItem value="Grocery">Grocery</MenuItem>
-                                    <MenuItem value="Housing">Housing</MenuItem>
-                                    <MenuItem value="Entertainment">Entertainment</MenuItem>
-                                    <MenuItem value="Utility">Utility</MenuItem>
-                                    <MenuItem value="Dining">Dining</MenuItem>
-                                    <MenuItem value="Healthcare">Healthcare</MenuItem>
-                                    <MenuItem value="Personal Care">Personal Care</MenuItem>
-                                    <MenuItem value="Clothing">Clothing</MenuItem>
-                                    <MenuItem value="Miscellaneous">Miscellaneous</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </FormGroup>
-                              
+
+                        <FormGroup className="mb-3" controlId="formBasicCategory">                                                  
+                        <Autocomplete
+                            onChange={(event, value) => setCategory(value)}
+                            disablePortal
+                            id="combo-box-demo"
+                            options={categories}
+                            
+                            renderInput={(params) => <TextField {...params} label="Category" />}
+                        />
+                        </FormGroup>     
                         <FormGroup className="mb-3" controlId="formBasicPayment">
                             <FormControl >
                                 <InputLabel>Payment Method</InputLabel>
@@ -139,10 +132,15 @@ function Transactions() {
                                 
                             </LocalizationProvider>
                         </FormGroup>
+                      
+    {/* 
+                            <Button variant="contained" className="center" type="submit">
+                                Submit
+                            </Button> */}
 
-                        <Button variant="contained" className="center" type="submit">
-                            Submit
-                        </Button>
+                        <Fab color="primary" aria-label="add" type="submit">
+                            <AddIcon />
+                        </Fab>
                     </Form>
                 </div>
             </div>
