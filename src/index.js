@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Welcome from './pages/Welcome'
 import Home from './pages/Home'
+import SpendingCategory from './pages/SpendingCategory'
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,6 +36,7 @@ root.render(
       <Route path="/budget" element={<Budget />}/>
       <Route path="/spendings" element={<Spendings />}/>
       <Route path="/transactions" element={<Transactions />}/>
+      <Route path="/spendings/category" element={<SpendingCategory />}/>
     </Routes>
   </Router>
 );

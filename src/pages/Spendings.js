@@ -4,33 +4,18 @@ import jwt_decode from "jwt-decode"
 import client from "../apis/Client";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
 import { DataGrid } from '@mui/x-data-grid';
 
+
 const columns = [
-    { field: 'transaction_id', headerName: 'transaction_id', width: 250, headerClassName: 'style--header'},
-    { field: 'merchant', headerName: 'Merchant', width: 250, headerClassName: 'style--header'},
-    { field: 'category', headerName: 'Category', width: 250, headerClassName: 'style--header'},
-    { field: 'amount', headerName: 'Amount ($)', type: 'number', valueGetter: ({ value }) => value && value.toFixed(2), width: 250, headerClassName: 'style--header'},
-    { field: 'transaction_date', headerName: 'Date', width: 250, type: 'date', valueGetter: ({ value }) => value && new Date(value.split('-')), headerClassName: 'style--header'},
-    { field: 'pymt_method_full', headerName: 'Payment Method', width: 250, headerClassName: 'style--header'},
+    { field: 'merchant', headerName: 'Merchant', width: 300, headerClassName: 'style--header'},
+    { field: 'category', headerName: 'Category', width: 300, headerClassName: 'style--header'},
+    { field: 'amount', headerName: 'Amount ($)', type: 'number', valueGetter: ({ value }) => value && value.toFixed(2), width: 300, headerClassName: 'style--header'},
+    { field: 'transaction_date', headerName: 'Date', width: 300, type: 'date', valueGetter: ({ value }) => value && new Date(value.split('-')), headerClassName: 'style--header'},
+    { field: 'pymt_method_full', headerName: 'Payment Method', width: 300, headerClassName: 'style--header'},
 ]
 
 function Spendings() {
@@ -67,7 +52,7 @@ function Spendings() {
             <Navigation></Navigation>
             <h2 style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}}>Overall spending</h2>
             <div className="center mt-5 mb-5">
-                    <Link style={{ textDecoration: 'none'}} to="/transactions">
+                    <Link style={{ textDecoration: 'none'}} to="/spendings/category">
                         <Button variant="contained" size="large" className="center me-2"> View monthly spending by category </Button>
                     </Link>
                     <Link style={{ textDecoration: 'none'}} to="/spendings">
