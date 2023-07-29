@@ -1,10 +1,9 @@
 import Navigation from "../components/Navigation";
-import { Row, Col, Form, InputGroup } from 'react-bootstrap'
-import Button from '@mui/material/Button';
+import { Form } from 'react-bootstrap'
 import jwt_decode from "jwt-decode"
 import client from "../apis/Client";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -13,15 +12,12 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import moment from 'moment';
 import Autocomplete from '@mui/material/Autocomplete';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-
-
 function Transactions() {
     const [merchant, setMerchant] = useState()
     const [amount, setAmount] = useState()
@@ -39,7 +35,6 @@ function Transactions() {
     const submitTransaction = async e => {
         const user_id = jwt_decode(localStorage.getItem('access_token')).user_id
         e.preventDefault();
-        console.log(date)
         const {data} = await client.post(
             "/api/user/transaction",
             {   
@@ -114,7 +109,6 @@ function Transactions() {
 
                         <FormGroup className="mb-3" controlId="formBasicDate">
                             <LocalizationProvider dateAdapter={AdapterDateFns} >
-                            
                                 <FormControl value={date} onChange={e => setDate(e.target.value)} >
                                     {/* <TextField type="date" label="Date" placeholder=""/> */}
                                     {/* <DateField format="YYYY-MM-DD" label="Date Picker" */}
@@ -122,14 +116,12 @@ function Transactions() {
                                             format="yyyy-MM-dd"
                                             label="Date"
                                             value={date}
-                                            
                                             onChange={(newValue) => {
                                                 setDate(newValue);
                                             }}
                                             renderInput={(params) => <TextField placeholder="" {...params} />}
                                     />
                                 </FormControl>
-                                
                             </LocalizationProvider>
                         </FormGroup>
                       
