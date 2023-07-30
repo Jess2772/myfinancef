@@ -164,9 +164,9 @@ function SpendingCategory() {
                     </Form>
                 </Grid>
             </Grid>
-            <Stack direction="row" width="100%" textAlign="center" spacing={2}>
+            <Stack sx = {{mx: 6 }} direction="row" width="100%" textAlign="center" spacing={4}>
                 <Box flexGrow={1}>
-                    <Typography>Number of Transactions per Category</Typography>
+                    <Typography sx = {{mr: 25}}>Number of Transactions per Category</Typography>
                     <PieChart
                         series={[
                             {
@@ -187,7 +187,7 @@ function SpendingCategory() {
                     />
                 </Box>
                 <Box flexGrow={1}>
-                    <Typography>Number of Transactions per Category</Typography>
+                    <Typography sx = {{mr: 25}}>Number of Transactions per Category</Typography>
                     <PieChart
                         series={[
                             {
@@ -208,7 +208,7 @@ function SpendingCategory() {
                     />
                 </Box>
                 <Box flexGrow={1}>
-                    <Typography>Amount Spent per Category</Typography>
+                    <Typography sx = {{mr: 25}}>Amount Spent per Category</Typography>
                     <PieChart
                         series={[
                             {
@@ -231,7 +231,7 @@ function SpendingCategory() {
                                 fontWeight: 'bold',
                             },
                         }}
-                        width={500}
+                        width={450}
                         height={300}
                         {...pieParams}
                     />
