@@ -23,7 +23,8 @@ import Checkbox from '@mui/material/Checkbox'
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import moment from 'moment';
-
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -47,11 +48,15 @@ const categories = [
     'Miscellaneous'
   ];
 
+const pieParams = {height: 300 };
+const palette = ['red', 'blue', 'green'];
+
 function SpendingCategory() {
     const [dateFrom, setDateFrom] = useState();
     const [dateTo, setDateTo] = useState();
     const [categoryName, setCategoryName] = useState([]);
-    const [pie, setPie] = useState([])
+    const [amountByCategory, setAmountByCategory] = useState([])
+    const [countByCategory, setCountByCategory] = useState([])
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -85,8 +90,8 @@ function SpendingCategory() {
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
         ).then((res) => {
-            console.log(res.data)
-            setPie(res.data.pie)
+            setAmountByCategory(res.data.amountByCategory)
+            setCountByCategory(res.data.countByCategory)
         })
     }
 
@@ -158,13 +163,14 @@ function SpendingCategory() {
                        
                     </Form>
                 </Grid>
-
-                <Grid item md={12}> 
-                    <Box style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} textAlign="center">
+            </Grid>
+            <Stack direction="row" width="100%" textAlign="center" spacing={2}>
+                <Box flexGrow={1}>
+                    <Typography>Number of Transactions per Category</Typography>
                     <PieChart
                         series={[
                             {
-                            data: pie,
+                            data: countByCategory,
                             highlightScope: { faded: 'global', highlighted: 'item' },
                             faded: { innerRadius: 30, additionalRadius: -30 },
                             startAngle: -90,
@@ -173,26 +179,44 @@ function SpendingCategory() {
                         ]}
                         sx={{
                             [`& .${pieArcClasses.faded}`]: {
-                              fill: 'gray',
+                            fill: 'gray',
                             },
                         }}
-                        width={400}
-                        height={200}
+                        width={500}
+                        height={300}
                     />
-                    </Box>
-                </Grid>
-                
-                <Grid item md={12}> 
-                    <Box style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} textAlign="center">
-                        
-                        <PieChart
+                </Box>
+                <Box flexGrow={1}>
+                    <Typography>Number of Transactions per Category</Typography>
+                    <PieChart
+                        series={[
+                            {
+                            data: countByCategory,
+                            highlightScope: { faded: 'global', highlighted: 'item' },
+                            faded: { innerRadius: 30, additionalRadius: -30 },
+                            startAngle: -90,
+                            endAngle: 270,
+                            },
+                        ]}
+                        sx={{
+                            [`& .${pieArcClasses.faded}`]: {
+                            fill: 'gray',
+                            },
+                        }}
+                        width={500}
+                        height={300}
+                    />
+                </Box>
+                <Box flexGrow={1}>
+                    <Typography>Amount Spent per Category</Typography>
+                    <PieChart
                         series={[
                             {
                             arcLabel: (item) => ` $${item.value}`,
                             arcLabelMinAngle: 45,
-                            data: pie,
+                            data: amountByCategory,
                             innerRadius: 30,
-                            outerRadius: 100,
+                            outerRadius: 140,
                             paddingAngle: 5,
                             cornerRadius: 5,
                             startAngle: -90,
@@ -207,15 +231,12 @@ function SpendingCategory() {
                                 fontWeight: 'bold',
                             },
                         }}
-                        width={400}
+                        width={500}
                         height={300}
-                        />
-                        
-
-                    </Box>
-                </Grid>
- 
-            </Grid>
+                        {...pieParams}
+                    />
+                </Box>
+            </Stack>
         </div>
 
     )
