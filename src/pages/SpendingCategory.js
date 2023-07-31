@@ -57,6 +57,7 @@ function SpendingCategory() {
     const [categoryName, setCategoryName] = useState([]);
     const [amountByCategory, setAmountByCategory] = useState([])
     const [countByCategory, setCountByCategory] = useState([])
+    const [merchantCountByCategory, setMerchantCountByCategory] = useState([])
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -92,14 +93,14 @@ function SpendingCategory() {
         ).then((res) => {
             setAmountByCategory(res.data.amountByCategory)
             setCountByCategory(res.data.countByCategory)
+            setMerchantCountByCategory(res.data.merchantCountByCategory)
         })
     }
 
     return (
         <div>
             <Navigation></Navigation>
-            <h2 style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}}>Spending by Category MAKE SURE FROM DATE IS LESS THAN TO DATE</h2>
-            <h2 style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}}>Pie charts to show spending by category, bar char to show count of transactions/category</h2>
+            <h2 style={{display: 'flex', margin: 10, justifyContent:'center', alignItems:'center'}}>Spending by Category</h2>
             <Grid container>
                 <Grid item md={12}>
                 <Form onSubmit={e => submitSpending(e)}>
@@ -164,28 +165,7 @@ function SpendingCategory() {
                     </Form>
                 </Grid>
             </Grid>
-            <Stack sx = {{mx: 6 }} direction="row" width="100%" textAlign="center" spacing={4}>
-                <Box flexGrow={1}>
-                    <Typography sx = {{mr: 25}}>Number of Transactions per Category</Typography>
-                    <PieChart
-                        series={[
-                            {
-                            data: countByCategory,
-                            highlightScope: { faded: 'global', highlighted: 'item' },
-                            faded: { innerRadius: 30, additionalRadius: -30 },
-                            startAngle: -90,
-                            endAngle: 270,
-                            },
-                        ]}
-                        sx={{
-                            [`& .${pieArcClasses.faded}`]: {
-                            fill: 'gray',
-                            },
-                        }}
-                        width={500}
-                        height={300}
-                    />
-                </Box>
+            <Stack sx = {{ mx: 6 }}direction="row" width="100%" textAlign="center" spacing={4}>
                 <Box flexGrow={1}>
                     <Typography sx = {{mr: 25}}>Number of Transactions per Category</Typography>
                     <PieChart
@@ -234,6 +214,27 @@ function SpendingCategory() {
                         width={450}
                         height={300}
                         {...pieParams}
+                    />
+                </Box>
+                <Box flexGrow={1}>
+                    <Typography sx = {{mr: 25}}>Most Frequented Merchants</Typography>
+                    <PieChart
+                        series={[
+                            {
+                            data: merchantCountByCategory,
+                            highlightScope: { faded: 'global', highlighted: 'item' },
+                            faded: { innerRadius: 30, additionalRadius: -30 },
+                            startAngle: -90,
+                            endAngle: 270,
+                            },
+                        ]}
+                        sx={{
+                            [`& .${pieArcClasses.faded}`]: {
+                            fill: 'gray',
+                            },
+                        }}
+                        width={500}
+                        height={300}
                     />
                 </Box>
             </Stack>
