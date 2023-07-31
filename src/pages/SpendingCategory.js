@@ -217,7 +217,7 @@ function SpendingCategory() {
                     />
                 </Box>
                 <Box flexGrow={1}>
-                    <Typography sx = {{mr: 25}}>Most Frequented Merchants</Typography>
+                    <Typography sx = {{mr: 25}}>Most Frequented Merchant per Category</Typography>
                     <PieChart
                         series={[
                             {
