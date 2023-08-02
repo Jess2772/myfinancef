@@ -19,6 +19,7 @@ import Logout from './pages/Logout';
 import Budget from './pages/Budget';
 import Spendings from './pages/Spendings';
 import Transactions from './pages/Transactions';
+import MonthSpending from './pages/MonthSpending';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
@@ -37,6 +38,7 @@ root.render(
       <Route path="/spendings" element={<Spendings />}/>
       <Route path="/transactions" element={<Transactions />}/>
       <Route path="/spendings/category" element={<SpendingCategory />}/>
+      <Route path="/spendings/monthly" element={<MonthSpending />}/>
     </Routes>
   </Router>
 );

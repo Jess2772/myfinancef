@@ -55,7 +55,7 @@ function Transactions() {
         window.location.reload();
     }
 
-    const categories = ['Grocery', 'Entertainment', 'Utility', 'Dining', 'Healthcare', 'Personal Care', 'Clothing', 'Miscellaneous']
+    const categories = ['Grocery', 'Entertainment', 'Utility', 'Dining', 'Healthcare', 'Clothing', 'Miscellaneous', 'Housing', 'Transportation']
 
     return (
         <div>

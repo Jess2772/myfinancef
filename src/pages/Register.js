@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
-import client from '../apis/Client'
+import client from '../apis/Client';
 import { useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Button from '@mui/material/Button';

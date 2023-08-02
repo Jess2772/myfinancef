@@ -55,7 +55,7 @@ function Spendings() {
                     <Link style={{ textDecoration: 'none'}} to="/spendings/category">
                         <Button variant="contained" size="large" className="center me-2"> View monthly spending by category </Button>
                     </Link>
-                    <Link style={{ textDecoration: 'none'}} to="/spendings">
+                    <Link style={{ textDecoration: 'none'}} to="/spendings/monthly">
                         <Button variant="contained" size="large" className="center me-2"> Month to day </Button>
                     </Link>
                     <Link style={{ textDecoration: 'none'}} to="/budget">
