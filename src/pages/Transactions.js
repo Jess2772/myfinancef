@@ -18,12 +18,16 @@ import moment from 'moment';
 import Autocomplete from '@mui/material/Autocomplete';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import Fade from "@mui/material/Fade";
 function Transactions() {
     const [merchant, setMerchant] = useState()
     const [amount, setAmount] = useState()
     const [category, setCategory] = useState()
     const [paymentType, setPaymentType] = useState()
     const [date, setDate] = useState();
+    const [alertVisibility, setAlertVisibility] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {        
@@ -50,9 +54,14 @@ function Transactions() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
+        ).then(
+            setAlertVisibility(true)
         )
- 
-        window.location.reload();
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
+        
     }
 
     const categories = ['Grocery', 'Entertainment', 'Utility', 'Dining', 'Healthcare', 'Clothing', 'Miscellaneous', 'Housing', 'Transportation']
@@ -124,17 +133,32 @@ function Transactions() {
                                 </FormControl>
                             </LocalizationProvider>
                         </FormGroup>
-                      
-    {/* 
-                            <Button variant="contained" className="center" type="submit">
-                                Submit
-                            </Button> */}
 
                         <Fab color="primary" aria-label="add" type="submit">
                             <AddIcon />
                         </Fab>
                     </Form>
+                    
                 </div>
+                <Stack sx={{ width: '100%' }} className="center" direction="row" width="100%" textAlign="center">
+                    <Fade
+                        in={alertVisibility} //Write the needed condition here to make it appear
+                        timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                        addEndListener={() => {
+                            setTimeout(() => {
+                            setAlertVisibility(false)
+                            }, 2000);
+                        }}
+                        >
+                            <Alert variant="outlined" severity="success">
+                                This is a success alert — check it out!
+                            </Alert>
+                    </Fade>
+                {/* <Alert variant="outlined" severity="success">
+                    This is a success alert — check it out!
+                </Alert> */}
+                </Stack>
+
             </div>
         </div>
     )
