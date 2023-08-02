@@ -1,13 +1,11 @@
 // Import the react JS packages
 import {useEffect, useState} from "react";
-import axios from "axios";
 import client from '../apis/Client'
 import jwt_decode from "jwt-decode"
 import { Link, useNavigate } from "react-router-dom";
 import Navigation from '../components/Navigation'
 import Button from '@mui/material/Button';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
-import PaidIcon from '@mui/icons-material/Paid';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 const Home = () => {     

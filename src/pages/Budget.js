@@ -1,19 +1,13 @@
-// imports
 import Navigation from "../components/Navigation";
-// Import the react JS packages
 import {useEffect, useState} from "react";
-import axios from "axios";
 import client from '../apis/Client'
 import jwt_decode from "jwt-decode"
-import { Link, useNavigate } from "react-router-dom";
-import { Row, Col, Form, InputGroup} from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
+import { Form } from 'react-bootstrap'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import FormGroup from '@mui/material/FormGroup';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 function Budget() {
     const [userBudget, setUserBudget] = useState('');
@@ -28,7 +22,6 @@ function Budget() {
     const [grocery_lmt, setGroceryLimit]= useState();
     const [healthcare_lmt, setHealthcareLimit]= useState();
     const [dining_lmt, setDiningLimit]= useState();
-    const [personal_care_lmt, setPersonalcareLimit]= useState();
     const [entertainment_lmt, setEntertainmentLimit]= useState();
     const [clothing_lmt, setClothingLimit]= useState();
     const [miscellaneous_lmt, setMiscellaneousLimit]= useState();
@@ -72,8 +65,7 @@ function Budget() {
             user_id: user_id,
             budget: parseFloat(housing_lmt) + parseFloat(utility_lmt) + parseFloat(transportation_lmt) + 
                     parseFloat(grocery_lmt) + parseFloat(healthcare_lmt) + parseFloat(dining_lmt) + 
-                    parseFloat(personal_care_lmt) + parseFloat(entertainment_lmt) + parseFloat(clothing_lmt) +
-                    parseFloat(miscellaneous_lmt),
+                    parseFloat(entertainment_lmt) + parseFloat(clothing_lmt) + parseFloat(miscellaneous_lmt),
             frequency: "Monthly",
             housing_lmt: housing_lmt,
             utility_lmt: utility_lmt,
@@ -81,7 +73,6 @@ function Budget() {
             grocery_lmt: grocery_lmt,
             healthcare_lmt: healthcare_lmt,
             dining_lmt: dining_lmt,
-            personal_care_lmt: personal_care_lmt,
             entertainment_lmt: entertainment_lmt,
             clothing_lmt: clothing_lmt,
             miscellaneous_lmt: miscellaneous_lmt
@@ -98,7 +89,7 @@ function Budget() {
         <div>
             <Navigation></Navigation>
             {
-                activeBudget ? (
+              
                     <div>
                         <h2 className="center mt-3">Budget: ${userBudget.budget} ({userBudget.frequency})</h2>
                         <p className="center mt-3">To update your budget, please re-enter all category limits and press submit</p>
@@ -177,18 +168,6 @@ function Budget() {
                                     </FormControl>
                                 </FormGroup>
 
-                                <FormGroup className="mb-3" controlId="formBasicPersonalCareLimit">
-                                    <FormControl value={personal_care_lmt} onChange={e => setPersonalcareLimit(e.target.value)} >
-                                        <TextField placeholder={userBudget.personal_care_lmt} variant="outlined" type="number" label="Personal Care Limit" InputProps={{startAdornment: (
-                                            <InputAdornment position="start">
-                                            $
-                                            </InputAdornment>
-                                        ), inputProps: {
-                                            min: 0, step: 0.01
-                                        }}} />
-                                    </FormControl>
-                                </FormGroup>
-
                                 <FormGroup className="mb-3" controlId="formBasicEntertainmentLimit">
                                     <FormControl value={entertainment_lmt} onChange={e => setEntertainmentLimit(e.target.value)} >
                                         <TextField placeholder={userBudget.entertainment_lmt} variant="outlined" type="number" label="Entertainment Limit" InputProps={{startAdornment: (
@@ -232,16 +211,8 @@ function Budget() {
                             </Form>
                         </div>
                     </div>
-                ) : (
-                    <div>
-                        Later issue
-                    </div>
-                )
             }
         </div>
-
     )
 }
-
-
 export default Budget;

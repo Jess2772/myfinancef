@@ -1,5 +1,4 @@
 import Navigation from "../components/Navigation";
-import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import jwt_decode from "jwt-decode"
 import client from "../apis/Client";
 import { useState, useEffect } from "react";
@@ -22,6 +21,8 @@ function Spendings() {
     const [spending, setUserSpending] = useState([]);
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {        
         if (localStorage.getItem('access_token') === null){
             navigate('/login')
@@ -39,6 +40,7 @@ function Spendings() {
                     }}, { withCredentials: true, crossDomain: true }   
                 ).then((res) => {
                     setUserSpending(res.data)
+                    setLoading(false)
                    
                 }).catch((err)=> {
                     console.log(err)
@@ -47,6 +49,16 @@ function Spendings() {
             })
         ()};     
     }, []);
+
+    if (loading) {
+        return (
+            
+            <div>
+                <Navigation></Navigation>
+                <h1>Loading</h1>
+            </div>
+        )
+    }
     return (
         <div >
             <Navigation></Navigation>

@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { PieChart, pieArcClasses, pieArcLabelClasses } from '@mui/x-charts/PieChart';
-import { BarChart } from '@mui/x-charts/BarChart';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -43,7 +42,6 @@ const categories = [
     'Utility',
     'Dining',
     'Healthcare',
-    'Personal Care',
     'Clothing',
     'Miscellaneous'
   ];
