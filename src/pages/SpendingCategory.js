@@ -47,7 +47,6 @@ const categories = [
   ];
 
 const pieParams = {height: 300 };
-const palette = ['red', 'blue', 'green'];
 
 function SpendingCategory() {
     const [dateFrom, setDateFrom] = useState();

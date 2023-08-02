@@ -22,13 +22,10 @@ import Paper from '@mui/material/Paper';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
 const m_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const d = new Date();
 const month = m_names[d.getMonth()]; 
 const year = d.getFullYear();
-
-const categories = ["Grocery", "Healthcare", "Dining", "Clothing", "Miscellaneous"] //#"Housing", "Utility", "Transportation", "Entertainment", 
 
 const style = {
     position: 'absolute',
@@ -79,39 +76,92 @@ function MonthSpending() {
     const handleEntertainmentOpen = () => setOpenEntertainment(true);
     const handleEntertainmentClose = () => setOpenEntertainment(false);
 
-
     const [monthSpending, setMonthSpending] = useState();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [userBudget, setUserBudget] = useState('');
 
     useEffect(() => {        
         if (localStorage.getItem('access_token') === null){
             navigate('/login')
         } else {
+    
             (async () => { 
                 const user_id = jwt_decode(localStorage.getItem('access_token')).user_id
-                return await client.post(
-                    'api/user/spending/month',
-                    {
-                        user_id: user_id
-                    }, 
-                    { headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
-                    }}, { withCredentials: true, crossDomain: true }   
-                ).then((res) => {    
-                    setMonthSpending(res.data)
-                    setLoading(false)
-                }).catch((err)=> {
-                    console.log(err)
-                })
+                const [spending, budget] = await Promise.all([
+                    client.post(
+                        'api/user/spending/month',
+                        {
+                            user_id: user_id
+                        }, 
+                        { headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        }}, { withCredentials: true, crossDomain: true }   
+                    ),
+                    client.post(
+                        'api/user/budget',
+                        {
+                            user_id: user_id
+                        }, 
+                        { headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        }}, { withCredentials: true, crossDomain: true }   
+                    )
+                ]);
+                setMonthSpending(spending.data)
+                setUserBudget(budget.data)
+                setLoading(false)
+
+                // return await client.post(
+                //     'api/user/spending/month',
+                //     {
+                //         user_id: user_id
+                //     }, 
+                //     { headers: {
+                //         'Content-Type': 'application/json',
+                //         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                //     }}, { withCredentials: true, crossDomain: true }   
+                // ).then((res) => {    
+                //     setMonthSpending(res.data)
+                //     setLoading(false)
+                // }).catch((err)=> {
+                //     console.log(err)
+                // })
+
+                // const {budget} = await client.post(
+                //     'api/user/budget',
+                //     {
+                //         user_id: user_id
+                //     },
+                //     { headers: {
+                //         'Content-Type': 'application/json',
+                //         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                //     }}, { withCredentials: true, crossDomain: true }   
+                // ).then((res) => {
+                //     if (res.request.status === 404) {
+                        
+                //     } else {
+                //         setUserBudget(res.data)
+                //         setLoading(false)
+                //     }
+                // }).catch((err)=> {
+                //     console.log(err)
+                // })
             })
-        ()};     
+        ()};
     }, []);
 
-    const renderCard = (category, open, handleOpen, handleClose) => {
+    const renderCard = (category, categoryBudget, open, handleOpen, handleClose) => {
         const spentThisMonth = monthSpending[category].spentThisMonth
         const transactions = monthSpending[category].transactions
+        var spendingStatus = "#008000"
+        if (spentThisMonth >= categoryBudget) {
+            spendingStatus = "#FF0000"
+        } else if (spentThisMonth / categoryBudget >= 0.75) {
+            spendingStatus = "#FF9966"
+        }
         return (
             <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -122,10 +172,10 @@ function MonthSpending() {
                 {category}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Budget: $100
+                Budget: ${categoryBudget.toFixed(2)}
             </Typography>
-            <Typography variant="">
-                {month} {year}: ${spentThisMonth}
+            <Typography color={spendingStatus}>
+                {month} {year}: ${spentThisMonth.toFixed(2)}
             </Typography>
             </CardContent>
             <CardActions>
@@ -157,7 +207,7 @@ function MonthSpending() {
                                         <TableCell component="th" scope="row">
                                             {row.merchant}
                                         </TableCell>
-                                        <TableCell align="right">{row.amount}</TableCell>
+                                        <TableCell align="right">{row.amount.toFixed(2)}</TableCell>
                                         <TableCell align="right">{row.transaction_date}</TableCell>
                                         <TableCell align="right">{row.pymt_method_full}</TableCell>
                                         </TableRow>
@@ -171,7 +221,6 @@ function MonthSpending() {
             </CardActions>
         </Card>
         )
-
     }
 
     if (loading) {
@@ -192,22 +241,22 @@ function MonthSpending() {
     return (
         <div>
             <Navigation></Navigation>
-            <h2 style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}}>Spending for this month (Aug. 2023). Pie chart like before?</h2>
+            <h1 style={{display: 'flex', margin: '10px', justifyContent:'center', alignItems:'center'}}>Spending for {month} {year}</h1>
             
             <Stack style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} className="mt-3" direction="row" width="100%" spacing={4}>
-                {renderCard("Grocery", openGrocery, handleGroceryOpen, handleGroceryClose)}
-                {renderCard("Healthcare", openHealthcare, handleHealthcareOpen, handleHealthcareClose)}
-                {renderCard("Dining", openDining, handleDiningOpen, handleDiningClose)}
+                {renderCard("Grocery", userBudget.grocery_lmt, openGrocery, handleGroceryOpen, handleGroceryClose)}
+                {renderCard("Healthcare", userBudget.healthcare_lmt, openHealthcare, handleHealthcareOpen, handleHealthcareClose)}
+                {renderCard("Dining", userBudget.dining_lmt, openDining, handleDiningOpen, handleDiningClose)}
             </Stack>
             <Stack style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} className="mt-3" direction="row" width="100%" spacing={4}>
-                {renderCard("Clothing", openClothing, handleClothingOpen, handleClothingClose)}
-                {renderCard("Transportation", openTransportation, handleTransportationOpen, handleTransportationClose)}
-                {renderCard("Entertainment", openEntertainment, handleEntertainmentOpen, handleEntertainmentClose)}
+                {renderCard("Clothing", userBudget.clothing_lmt, openClothing, handleClothingOpen, handleClothingClose)}
+                {renderCard("Transportation", userBudget.transportation_lmt, openTransportation, handleTransportationOpen, handleTransportationClose)}
+                {renderCard("Entertainment", userBudget.entertainment_lmt, openEntertainment, handleEntertainmentOpen, handleEntertainmentClose)}
             </Stack>  
             <Stack style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} className="mt-3" direction="row" width="100%" spacing={4}>
-                {renderCard("Miscellaneous", openMisc, handleMiscOpen, handleMiscClose)}
-                {renderCard("Housing", openHousing, handleHousingOpen, handleHousingClose)}
-                {renderCard("Utility", openUtility, handleUtilityOpen, handleUtilityClose)}
+                {renderCard("Miscellaneous", userBudget.miscellaneous_lmt, openMisc, handleMiscOpen, handleMiscClose)}
+                {renderCard("Housing", userBudget.housing_lmt, openHousing, handleHousingOpen, handleHousingClose)}
+                {renderCard("Utility", userBudget.utility_lmt, openUtility, handleUtilityOpen, handleUtilityClose)}
 
             </Stack>  
         </div>

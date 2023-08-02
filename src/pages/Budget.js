@@ -12,6 +12,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 function Budget() {
     const [userBudget, setUserBudget] = useState('');
     const [activeBudget, setActiveBudget] = useState(true);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const [budget, setBudget]= useState();
@@ -25,7 +26,6 @@ function Budget() {
     const [entertainment_lmt, setEntertainmentLimit]= useState();
     const [clothing_lmt, setClothingLimit]= useState();
     const [miscellaneous_lmt, setMiscellaneousLimit]= useState();
-
 
     useEffect(() => {        
         if (localStorage.getItem('access_token') === null){
@@ -48,6 +48,7 @@ function Budget() {
                     } else {
                         setUserBudget(res.data)
                     }
+                    setLoading(false)
                 }).catch((err)=> {
                     console.log(err)
                 })
@@ -83,6 +84,16 @@ function Budget() {
           }, withCredentials: true, crossDomain: true}
         )
         window.location.reload();
+    }
+
+
+    if (loading) {
+        return (
+            <div>
+                <Navigation></Navigation>
+                <h1>Loading</h1>
+          </div>
+        )
     }
     
     return (
