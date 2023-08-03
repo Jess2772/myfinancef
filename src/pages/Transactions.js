@@ -28,6 +28,8 @@ function Transactions() {
     const [paymentType, setPaymentType] = useState()
     const [date, setDate] = useState();
     const [alertVisibility, setAlertVisibility] = useState(false)
+    const [alertType, setAlertType] = useState('success')
+    const [alertDesc, setAlertDesc] = useState('Successfully recorded the transaction!')
     const navigate = useNavigate();
 
     useEffect(() => {        
@@ -39,7 +41,7 @@ function Transactions() {
     const submitTransaction = async e => {
         const user_id = jwt_decode(localStorage.getItem('access_token')).user_id
         e.preventDefault();
-        const {data} = await client.post(
+        return await client.post(
             "/api/user/transaction",
             {   
                 user_id: user_id,
@@ -54,14 +56,17 @@ function Transactions() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             }, withCredentials: true, crossDomain: true}
-        ).then(
+        ).then((res) => {
             setAlertVisibility(true)
-        )
-
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
-        
+            if (res.request.status === 500) {
+                setAlertType('error')
+                setAlertDesc('There was an error recording your transaction')
+            } else {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            }
+        })
     }
 
     const categories = ['Grocery', 'Entertainment', 'Utility', 'Dining', 'Healthcare', 'Clothing', 'Miscellaneous', 'Housing', 'Transportation']
@@ -119,8 +124,6 @@ function Transactions() {
                         <FormGroup className="mb-3" controlId="formBasicDate">
                             <LocalizationProvider dateAdapter={AdapterDateFns} >
                                 <FormControl value={date} onChange={e => setDate(e.target.value)} >
-                                    {/* <TextField type="date" label="Date" placeholder=""/> */}
-                                    {/* <DateField format="YYYY-MM-DD" label="Date Picker" */}
                                     <DatePicker
                                             format="yyyy-MM-dd"
                                             label="Date"
@@ -140,7 +143,7 @@ function Transactions() {
                     </Form>
                     
                 </div>
-                <Stack sx={{ width: '100%' }} className="center" direction="row" width="100%" textAlign="center">
+                <Stack sx={{ width: '100%' }} className="center" direction="col" width="100%" textAlign="center">
                     <Fade
                         in={alertVisibility} //Write the needed condition here to make it appear
                         timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
@@ -150,13 +153,10 @@ function Transactions() {
                             }, 2000);
                         }}
                         >
-                            <Alert variant="outlined" severity="success">
-                                This is a success alert — check it out!
-                            </Alert>
+                        <Alert variant="outlined" severity={alertType}>
+                            {alertDesc}
+                        </Alert>
                     </Fade>
-                {/* <Alert variant="outlined" severity="success">
-                    This is a success alert — check it out!
-                </Alert> */}
                 </Stack>
 
             </div>
