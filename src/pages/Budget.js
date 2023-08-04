@@ -9,6 +9,9 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import InputAdornment from '@mui/material/InputAdornment';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import Fade from "@mui/material/Fade";
 function Budget() {
     const [userBudget, setUserBudget] = useState('');
     const [activeBudget, setActiveBudget] = useState(true);
@@ -26,6 +29,10 @@ function Budget() {
     const [entertainment_lmt, setEntertainmentLimit]= useState();
     const [clothing_lmt, setClothingLimit]= useState();
     const [miscellaneous_lmt, setMiscellaneousLimit]= useState();
+
+    const [alertVisibility, setAlertVisibility] = useState(false)
+    const [alertType, setAlertType] = useState('success')
+    const [alertDesc, setAlertDesc] = useState('Successfully recorded your budget!')
 
     useEffect(() => {        
         if (localStorage.getItem('access_token') === null){
@@ -60,7 +67,7 @@ function Budget() {
     const submitBudget = async e => {
         e.preventDefault();
         const user_id = jwt_decode(localStorage.getItem('access_token')).user_id
-        const {data} = await client.post(
+        return await client.post(
           "/api/create/budget",
           {
             user_id: user_id,
@@ -82,8 +89,13 @@ function Budget() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
           }, withCredentials: true, crossDomain: true}
-        )
-        window.location.reload();
+        ).then((res) => {
+            setAlertVisibility(true)
+            if (res.request.status === 500) {
+                setAlertType('error')
+                setAlertDesc('There was an error recording your budget')
+            }
+        })
     }
 
 
@@ -221,6 +233,21 @@ function Budget() {
 
                             </Form>
                         </div>
+                        <Stack sx={{ width: '100%' }} className="center" direction="col" width="100%" textAlign="center">
+                            <Fade
+                                in={alertVisibility} //Write the needed condition here to make it appear
+                                timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                                addEndListener={() => {
+                                    setTimeout(() => {
+                                    setAlertVisibility(false)
+                                    }, 2000);
+                                }}
+                                >
+                                <Alert variant="outlined" severity={alertType}>
+                                    {alertDesc}
+                                </Alert>
+                            </Fade>
+                        </Stack>
                     </div>
             }
         </div>
