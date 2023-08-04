@@ -61,6 +61,10 @@ function Transactions() {
             if (res.request.status === 500) {
                 setAlertType('error')
                 setAlertDesc('There was an error recording your transaction')
+            } else {
+                setTimeout(() => {
+                    navigate('/transactions')
+                }, 2000);
             }
         })
     }
