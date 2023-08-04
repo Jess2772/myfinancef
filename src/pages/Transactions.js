@@ -61,10 +61,6 @@ function Transactions() {
             if (res.request.status === 500) {
                 setAlertType('error')
                 setAlertDesc('There was an error recording your transaction')
-            } else {
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
             }
         })
     }
