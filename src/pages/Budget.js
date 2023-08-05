@@ -94,6 +94,10 @@ function Budget() {
             if (res.request.status === 500) {
                 setAlertType('error')
                 setAlertDesc('There was an error recording your budget')
+            } else {
+                setTimeout(() => {
+                    navigate('/home')
+                }, 2000);
             }
         })
     }
