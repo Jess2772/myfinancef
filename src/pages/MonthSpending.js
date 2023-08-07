@@ -234,8 +234,7 @@ function MonthSpending() {
     return (
         <div>
             <Navigation></Navigation>
-            <h1 style={{display: 'flex', margin: '10px', justifyContent:'center', alignItems:'center'}}>Spending for {month} {year}</h1>
-            
+            <h1 style={{display: 'flex', margin: '20px', justifyContent:'center', alignItems:'center'}}>Current spending for {month} {year}: ${monthSpending.totalSpent.toFixed(2)}</h1>
             <Stack style={{display: 'flex', margin: 'auto', justifyContent:'center', alignItems:'center'}} className="mt-3" direction="row" width="100%" spacing={4}>
                 {renderCard("Grocery", userBudget.grocery_lmt, openGrocery, handleGroceryOpen, handleGroceryClose)}
                 {renderCard("Healthcare", userBudget.healthcare_lmt, openHealthcare, handleHealthcareOpen, handleHealthcareClose)}
