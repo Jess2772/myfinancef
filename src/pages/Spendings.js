@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { DataGrid } from '@mui/x-data-grid';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const columns = [
     { field: 'merchant', headerName: 'Merchant', width: 300, headerClassName: 'style--header'},
@@ -52,10 +53,12 @@ function Spendings() {
 
     if (loading) {
         return (
-            
             <div>
                 <Navigation></Navigation>
-                <h1>Loading</h1>
+                <Box sx={{display: 'flex', margin: 40, justifyContent:'center', alignItems:'center' }}>
+
+                    <CircularProgress />
+                </Box>
             </div>
         )
     }

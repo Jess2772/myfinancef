@@ -12,6 +12,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Fade from "@mui/material/Fade";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 function Budget() {
     const [userBudget, setUserBudget] = useState('');
     const [activeBudget, setActiveBudget] = useState(true);
@@ -107,8 +110,10 @@ function Budget() {
         return (
             <div>
                 <Navigation></Navigation>
-                <h1>Loading</h1>
-          </div>
+                <Box sx={{display: 'flex', margin: 40, justifyContent:'center', alignItems:'center' }}>
+                    <CircularProgress />
+                </Box>
+            </div>
         )
     }
     

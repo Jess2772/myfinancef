@@ -19,9 +19,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-
 const m_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const d = new Date();
 const month = m_names[d.getMonth()]; 
@@ -224,18 +222,13 @@ function MonthSpending() {
     }
 
     if (loading) {
-        return (
-            
+        return (         
             <div>
                 <Navigation></Navigation>
-                <h1>Loading</h1>
-                <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                >
-                open={loading}
-                <CircularProgress color="inherit" />
-                </Backdrop>
-          </div>
+                <Box sx={{display: 'flex', margin: 40, justifyContent:'center', alignItems:'center' }}>
+                    <CircularProgress />
+                </Box>
+            </div>
         )
     }
     return (
