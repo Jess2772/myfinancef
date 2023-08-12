@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import Button from '@mui/material/Button';
 import { TypeAnimation } from 'react-type-animation';
