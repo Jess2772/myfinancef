@@ -62,6 +62,8 @@ function Transactions() {
                 setAlertType('error')
                 setAlertDesc('There was an error recording your transaction')
             } else {
+                setAlertType('success')
+                setAlertDesc('Successfully recorded the transaction!')
                 setTimeout(() => {
                     navigate('/transactions')
                 }, 2000);
